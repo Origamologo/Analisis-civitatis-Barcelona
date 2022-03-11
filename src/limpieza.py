@@ -63,4 +63,5 @@ def pastor_de_guiris(df, ciudades):
         guiris_esquilados['total_pernoctaciones'] = df_pernocguiris_esp['total'] + df_pernocguiris_ext['total']
         guiris_esquilados['media_total_pernoc'] = guiris_esquilados['total_pernoctaciones'] / guiris_esquilados['total_viajeros']
         
-        return guiris_esquilados.to_pickle(f'{ciudad}_guiris_esquilados.pkl')
+        guiris_esquilados.to_pickle(f'{ciudad}_guiris_esquilados.pkl')
+    return
