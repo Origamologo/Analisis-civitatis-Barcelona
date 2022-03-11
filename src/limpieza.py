@@ -1,3 +1,5 @@
+import pandas as pd
+
 def pastor_de_guiris(df, ciudades):
     '''
     Separa, organiza y guarda en formato pickle los datos 
