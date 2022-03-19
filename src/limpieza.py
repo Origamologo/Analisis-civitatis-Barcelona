@@ -127,3 +127,8 @@ def dict_civitatis(lista):
             dict_revius['opinion'].append(reviu[3])
             dict_revius['viajo_con'].append(reviu[4])
     return dict_revius
+
+def values_sin_espacios(df):
+    for i in df.columns:
+        df[i] = df[i].str.strip()
+    return df
