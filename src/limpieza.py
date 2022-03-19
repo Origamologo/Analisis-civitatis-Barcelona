@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 def pastor_de_guiris(df, ciudades):
     '''
