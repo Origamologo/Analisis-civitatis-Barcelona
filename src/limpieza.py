@@ -3,37 +3,37 @@ import re
 
 def pastor_de_guiris(df, ciudades):
     '''
-    Separa, organiza y guarda en formato pickle los datos 
-    de la ciudad o ciudades elegidas.
-    Las fechas serán el index y tendremos columnas para:
-        - Número de viajeros residentes en Espana
-        - Número de viajeros residentes en el extranjero
-        - Número de pernoctaciones de los viajeros residentes en Espana
-        - Número de pernoctaciones de los viajeros residentes en el extranjero
-        - Media de pernoctaciones de los viajeros residentes en Espana
-        - Media de pernoctaciones de los viajeros residentes en el extranjero
-        - El número total de viajeros, sumando nacionales y extranjeros
-        - El número total de pernoctaciones, sumando las de viajeros nacionales
-          con las de los extranjeros
-        - La media del total de pernoctaciones
+    Separate, organize and save data in pickle format
+    for the chosen city or cities.
+    The dates will be the index and we will have columns for:
+        - Number of travelers living in Spain
+        - Number of travelers living abroad
+        - Number of overnight stays by travelers living in Spain
+        - Number of overnight stays by travelers living abroad
+        - Average overnight stays of travelers living in Spain
+        - Average overnight stays of travelers living abroad
+        - The total number of travelers, adding nationals and foreigners
+        - The total number of overnight stays, adding those of national travelers
+          with those of foreigners
+        - The average of the total overnight stays
     Args:
-        df (pandas.DataFrame): el data frame que contiene los datos 
-                               de TODAS las zonas turísticas
-        ciudades (list): lista con la ciudad o ciudades de las que 
-                         se desea extraer los datos
+        df (pandas.DataFrame): the data frame containing the data
+                               of ALL tourist areas
+        ciudades (list): list with the city or cities from which
+                         you want to extract the data
     Methods:
-        pernocguiris / numguiris: divide el número de pernoctaciones 
-                                  entre el número de viajeros para obtener 
-                                  la media de pernoctaciones
-        numguiris_esp + numguiris_ext: suma los viajeros nacionales con los 
-                                       extranjeros para obtener el número total 
-                                       de turistas
-        pernocguiris_esp + pernocguiris_ext: suma las pernoctaciones nacionales 
-                                             con las extranjeras para obtener el 
-                                             número total de turistas
+        pernocguiris / numguiris: divides the number of overnight stays
+                                  between the number of travelers to obtain
+                                  the average number of overnight stays
+        numguiris_esp + numguiris_ext: sums the national travelers with the
+                                       foreigners to get the total number
+                                       of tourists
+        pernocguiris_esp + pernocguiris_ext: sums national overnight stays
+                                             with foreigners to obtain the
+                                             total number of tourists
     Return:
-        Guarda el nuevo data frame en formato pickle bajo el nombre de la ciudad
-        seguido '_guiris_esquilados.pkl'
+        Saves the new data frame in pickle format under the name of the city
+        followed by '_guiris_esquilados.pkl'
     '''
 
     for ciudad in ciudades:
@@ -86,7 +86,7 @@ def quitar_respuestas(lista):
             reviu.pop(-2)
     return lista
 
-def dict_civitatis(lista):
+def dict_civitatis_completo(lista):
     dict_revius = {'fecha' : [],
                'nombre' : [],
                'procedencia' : [],
@@ -126,6 +126,58 @@ def dict_civitatis(lista):
             dict_revius['procedencia'].append(reviu[2])
             dict_revius['opinion'].append(reviu[3])
             dict_revius['viajo_con'].append(reviu[4])
+    return dict_revius
+
+def dict_civitatis_5(lista):
+    dict_revius = {'fecha' : [],
+               'nombre' : [],
+               'procedencia' : [],
+               'opinion' : [],
+               'viajo_con' : []}
+    for reviu in lista:
+        if len(reviu)==5:
+            dict_revius['fecha'].append(reviu[0])
+            dict_revius['nombre'].append(reviu[1])
+            dict_revius['procedencia'].append(reviu[2])
+            dict_revius['opinion'].append(reviu[3])
+            dict_revius['viajo_con'].append(reviu[4])
+    return dict_revius
+
+def dict_civitatis_2_4(lista):
+    dict_revius = {'fecha' : [],
+               'nombre' : [],
+               'procedencia' : [],
+               'opinion' : [],
+               'viajo_con' : []}
+    for reviu in lista:
+        if len(reviu)==2:
+            dict_revius['fecha'].append(reviu[0])
+            dict_revius['nombre'].append(reviu[1])
+            dict_revius['procedencia'].append('')
+            dict_revius['opinion'].append('')
+            dict_revius['viajo_con'].append('')
+        elif len(reviu)==3:
+            dict_revius['fecha'].append(reviu[0])
+            dict_revius['nombre'].append(reviu[1])
+            if len(re.findall(' Viajó.*', reviu[2]))>0:
+                dict_revius['procedencia'].append('')
+                dict_revius['opinion'].append('')
+                dict_revius['viajo_con'].append(reviu[2])
+            else:
+                dict_revius['procedencia'].append(reviu[2])
+                dict_revius['opinion'].append('')
+                dict_revius['viajo_con'].append('')
+        elif len(reviu)==4:
+            dict_revius['fecha'].append(reviu[0])
+            dict_revius['nombre'].append(reviu[1])
+            dict_revius['procedencia'].append(reviu[2])
+            if len(re.findall(' Viajó.*', reviu[3]))>0:
+                dict_revius['opinion'].append('')
+                dict_revius['viajo_con'].append(reviu[3])
+            else:
+                dict_revius['opinion'].append(reviu[3])
+                dict_revius['viajo_con'].append('')
+        
     return dict_revius
 
 def values_sin_espacios(df):
