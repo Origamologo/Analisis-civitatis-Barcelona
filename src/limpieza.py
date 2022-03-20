@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import re
 
 def pastor_de_guiris(df, ciudades):
@@ -66,7 +67,7 @@ def pastor_de_guiris(df, ciudades):
         guiris_esquilados['total_pernoctaciones'] = df_pernocguiris_esp['total'] + df_pernocguiris_ext['total']
         guiris_esquilados['media_total_pernoc'] = round((guiris_esquilados['total_pernoctaciones'] / guiris_esquilados['total_viajeros']), 1)
         
-        guiris_esquilados.to_pickle(f'{ciudad}_guiris_esquilados.pkl')
+        guiris_esquilados.to_pickle(rf'C:\Users\mituc\Ironhack\Curso\IronLabs\Proyecto-1\data\{ciudad}_guiris_esquilados.pkl')
     return
 
 def pulir(lista):
@@ -180,7 +181,30 @@ def dict_civitatis_2_4(lista):
         
     return dict_revius
 
+def drop_tourist(df):
+    num_remove = int((len(df['fecha']) * 23.6) //100)
+    drop_tourist = np.random.choice(df.index, num_remove, replace=False)
+    df = df.drop(drop_tourist)
+    return df
+
 def values_sin_espacios(df):
     for i in df.columns:
         df[i] = df[i].str.strip()
+    return df
+
+def date_time(df):
+    df['fecha'] = df['fecha'].str.replace(' / ', '-')
+    df['fecha'] = df['fecha'].str.replace('Ene', '01')
+    df['fecha'] = df['fecha'].str.replace('Feb', '02')
+    df['fecha'] = df['fecha'].str.replace('Mar', '03')
+    df['fecha'] = df['fecha'].str.replace('Abr', '04')
+    df['fecha'] = df['fecha'].str.replace('May', '05')
+    df['fecha'] = df['fecha'].str.replace('Jun', '06')
+    df['fecha'] = df['fecha'].str.replace('Jul', '07')
+    df['fecha'] = df['fecha'].str.replace('Ago', '08')
+    df['fecha'] = df['fecha'].str.replace('Sep', '09')
+    df['fecha'] = df['fecha'].str.replace('Oct', '10')
+    df['fecha'] = df['fecha'].str.replace('Nov', '11')
+    df['fecha'] = df['fecha'].str.replace('Dic', '12')
+    df['fecha'] = pd.to_datetime(df['fecha'], format='%d-%m-%Y')
     return df
