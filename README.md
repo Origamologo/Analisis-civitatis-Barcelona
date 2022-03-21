@@ -22,4 +22,15 @@ To check if the tourist who booked the activity actually showed up so they can c
 To achieve the objetive, the information from the reviews of civitatis' free tour in Barcelona will be compared with the tourism data provided by the spanish government. We will follow this steps:
   1. **Get and clean the goverment data:** We will work with the csv 2078 downloaded from https://datos.gob.es It must be cleaned and enriched with some extra information. We'll have to extract the data for the tourist area we want to analize and organized it to get the variables that we will be using, mainly the number of tourist organized by date and separated by their origin.
   2. **Get and clean the civitatis reviews:** The reviews will be scraped from https://www.civitatis.com/es/barcelona/free-tour-barcelona/opiniones This information must be cleaned and organized to get the relevant data that we need for this study which, as for the goverment data, will mainly be the number of tourist organized by date and separated by their origin.
-  3. **Compare the data and drop conclusions:** Finally, we will visualize the obtained data through graphics that will help us to understand how has been the evolution of tourism in general and the performance of civitatis in particular before and after the covid-19 crisis.
+  3. **Generate data frames for visualization:** Once we had cleaned the data, we will select what we need to perform our study.
+  4. **Compare the data and drop conclusions:** Finally, we will visualize the obtained data through graphics that will help us to understand how has been the evolution of tourism in general and the performance of civitatis in particular before and after the covid-19 crisis.
+
+### Structure of the project files
+​
+The structure of this project is composed of:<br/>
+ a) A folder of notebooks:<br/>
+    **1_limpieza.ipynb:** contains the study and cleaning of the data given by the spanish goverment.<br/>
+    **2_scraping.ipynb:** performs the scraping of the reviews of the civitatis' freetour in barcelona.<br/>
+    **3_limpieza_scraping.ipynb:** contains the study and cleaning of the data obtained in the scraping.<br/>
+    **4_dataframes.ipynb:** using the cleaned data, generates the data frames with just the needed information for the study.<br/>
+    **5_visualization.ipynb:** graphs and conclusions of the study.<br/>
