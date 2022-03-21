@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import re
 
+# FUNCTION TO CLEAN THE CSV FROM THE GOVERMENT
+
 def pastor_de_guiris(df, ciudades):
     '''
     Separates, organizes and saves the data in pickle format
@@ -69,6 +71,8 @@ def pastor_de_guiris(df, ciudades):
         
         guiris_esquilados.to_pickle(rf'C:\Users\mituc\Ironhack\Curso\IronLabs\Proyecto-1\data\{ciudad}_guiris_esquilados.pkl')
     return
+
+# FUNCTIONS TO CLEAN AND ORGANIZE THE INFORMATION FROM THE REVIEWS OBTAINED IN THE SCRAPING
 
 def revius_separados(revius):
     """
@@ -298,3 +302,34 @@ def date_time(df):
     df['fecha'] = df['fecha'].str.replace('Dic', '12')
     df['fecha'] = pd.to_datetime(df['fecha'], format='%d-%m-%Y')
     return df
+
+# FUNCTIONS TO GENERATE DATA FRAMES FOR VISUALIZATION
+
+def total_civitatis_tourists_month(df_civitatis_clean):
+    """
+    It shows the number of tourists grouped by month and saves it in pickle format
+    Arg:
+        df_civitatis_clean (pandas DataFrame): The data frame with all the reviews by day
+    Returns:
+        A data frame with the number of tourist by month
+    """
+    df_turistas_fecha = df_civitatis_clean.set_index('fecha')
+    df_numero_turistas_fecha = df_turistas_fecha.groupby([(df_turistas_fecha.index.year),(df_turistas_fecha.index.month)]).count()
+    df_numero_turistas_fecha = df_numero_turistas_fecha.drop(['procedencia', 'opinion', 'viajo_con'], axis=1).rename(columns={'nombre':'numero_turistas'})
+    df_turistas_civitatis = df_numero_turistas_fecha.to_pickle(r'C:\Users\mituc\Ironhack\Curso\IronLabs\Proyecto-1\data\numero_turistas_fecha.pkl')
+    return df_turistas_civitatis
+
+def admon_cividates(df_turistas_admon):
+    """
+    It selects the total number of tourists for the dates we'll be analyzing
+    Arg:
+        df_turistas_admon (pandas DataFrame): the complete dataframe from the goverment
+    Returns:
+        A data frame with the total number of tourists by month for the desired dates
+    """
+    df_turistas_admon.reset_index(inplace=True)
+    df_admon_select = df_turistas_admon.iloc[1:56]
+    d=df_admon_select.sort_values(by=['periodo'])
+    d=d.drop(['viajeros_espana', 'viajeros_extranjero',	'pernoctaciones_espana', 'pernoctaciones_extranjero',	'media_pernoc_esp', 'media_pernoc_ext', 'total_pernoctaciones',	'media_total_pernoc'],axis=1)
+    df_admon_cividates = d.to_pickle(r'C:\Users\mituc\Ironhack\Curso\IronLabs\Proyecto-1\data\admon_cividates.pkl')
+    return df_admon_cividates
