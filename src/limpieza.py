@@ -4,7 +4,7 @@ import re
 
 def pastor_de_guiris(df, ciudades):
     '''
-    Separate, organize and save data in pickle format
+    Separates, organizes and saves the data in pickle format
     for the chosen city or cities.
     The dates will be the index and we will have columns for:
         - Number of travelers living in Spain
@@ -70,7 +70,37 @@ def pastor_de_guiris(df, ciudades):
         guiris_esquilados.to_pickle(rf'C:\Users\mituc\Ironhack\Curso\IronLabs\Proyecto-1\data\{ciudad}_guiris_esquilados.pkl')
     return
 
+def revius_separados(revius):
+    """
+    It organizes the result of the scraping so we can have the reviews as separate elements.
+        1. It will join all the separate elements into a single string
+        2. It will cut the string by the element that divides the reviews, 
+             generating a list of lists, each sublist being one review
+        3. It will discard the blank sublists
+        4. It will divide each piece of information of the sublists (reviews) 
+           into separate strings
+    Returns:
+        A list of lists, each sublist corresponding to a review
+    """
+    civitatis = [' '.join(str(i) for i in revius)]
+    corte = '\ue9ce\ue9ce\ue9ce\ue9ce\ue9ce\n'
+    civitatis_ = civitatis[0].split(corte)
+    civitatis_revius = [i for i in civitatis_[2::2]]
+    civitatis_revius_limpio = [i.split('\n') for i in civitatis_revius]
+    return civitatis_revius_limpio
+
 def pulir(lista):
+    """
+    It cleans the reviews from the elements that give useless information:
+        - Blank strings at the end
+        - A string containing the initial letter of the client's name
+        - All the strings that contain information from the bottom of 
+          the web page, completely unrelated with the reviews
+    Arg:
+        lista (list): the list of lists to be cleaned
+    Returns:
+        The list of reviews whithout the undesired elements
+    """
     for reviu in lista:
         reviu.pop()
         reviu.pop(1)
@@ -82,12 +112,31 @@ def pulir(lista):
     return  lista
 
 def quitar_respuestas(lista):
+    """
+    Whenever there was a bad review, there will a string containing the answer from the company.
+    As we don't need this particular piece of information, this function erase it.
+    Arg:
+        lista (list): the list to be cleanned from company answers
+    Method:
+        All the sublists have a length from 2 to 5, except those containing an answer, 
+        which measure 6, so we will apply the function to len(sublist) == 6
+    Returns:
+        The list of reviews without the company answer
+    """
     for reviu in lista:
         if len(reviu)==6:
             reviu.pop(-2)
     return lista
 
 def dict_civitatis_completo(lista):
+    """
+    It creates a dicctionary with the desired information for each review, 
+    so we can create a data frame from it.
+    Arg:
+        lista (list): the list of lists containing the cleanned reviews
+    Returns:
+        A dictionary containing the elements of each review
+    """
     dict_revius = {'fecha' : [],
                'nombre' : [],
                'procedencia' : [],
@@ -130,6 +179,16 @@ def dict_civitatis_completo(lista):
     return dict_revius
 
 def dict_civitatis_5(lista):
+    """
+    It creates a dicctionary with the desired information for each review with 
+    its five keys fullfilled, so we can create a data frame from it.
+    Arg:
+        lista (list): the list of lists containing the cleanned reviews with 
+    its five keys fullfilled
+    Returns:
+        A dictionary containing the elements of each review with 
+        its five keys fullfilled
+    """
     dict_revius = {'fecha' : [],
                'nombre' : [],
                'procedencia' : [],
@@ -145,6 +204,16 @@ def dict_civitatis_5(lista):
     return dict_revius
 
 def dict_civitatis_2_4(lista):
+    """
+    It creates a dicctionary with the desired information for each review with 
+    some of its keys in blank, so we can create a data frame from it.
+    Arg:
+        lista (list): the list of lists containing the cleanned reviews
+        with some of its keys in blank
+    Returns:
+        A dictionary containing the elements of each review with 
+        some of its keys in blank
+    """
     dict_revius = {'fecha' : [],
                'nombre' : [],
                'procedencia' : [],
@@ -182,17 +251,38 @@ def dict_civitatis_2_4(lista):
     return dict_revius
 
 def drop_tourist(df):
+    """
+    It erases 23.6% of the rows randomly chosen.
+    Arg:
+        df (pandas DataFrame): the data frame with extra rows
+    Returns:
+        The original data frame with 23.6% of the rows deleted
+    """
     num_remove = int((len(df['fecha']) * 23.6) //100)
     drop_tourist = np.random.choice(df.index, num_remove, replace=False)
     df = df.drop(drop_tourist)
     return df
 
 def values_sin_espacios(df):
+    """
+    It takes away the extra spaces at the begining and end of the values
+    Arg:
+        df (pandas DataFrame): a data frame with extra spaces in its values
+    Returns:
+        The data frame cleaned from undesirable spaces
+    """
     for i in df.columns:
         df[i] = df[i].str.strip()
     return df
 
 def date_time(df):
+    """
+    It transforms the column containing dates into date-time format
+    Arg:
+        df (pandas DataFrame): a data frame with a date column needed to be clean
+    Returns:
+        The data frame with the column containing dates into date-time format
+    """
     df['fecha'] = df['fecha'].str.replace(' / ', '-')
     df['fecha'] = df['fecha'].str.replace('Ene', '01')
     df['fecha'] = df['fecha'].str.replace('Feb', '02')
