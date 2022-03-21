@@ -28,9 +28,15 @@ To achieve the objetive, the information from the reviews of civitatis' free tou
 ### Structure of the project files
 ​
 The structure of this project is composed of:<br/>
- a) A folder of notebooks:<br/>
+  a. A folder of notebooks:<br/>
     **1_limpieza.ipynb:** contains the study and cleaning of the data given by the spanish goverment.<br/>
     **2_scraping.ipynb:** performs the scraping of the reviews of the civitatis' freetour in barcelona.<br/>
     **3_limpieza_scraping.ipynb:** contains the study and cleaning of the data obtained in the scraping.<br/>
     **4_dataframes.ipynb:** using the cleaned data, generates the data frames with just the needed information for the study.<br/>
     **5_visualization.ipynb:** graphs and conclusions of the study.<br/>
+    
+  b. src folder:<br/>
+    **limpieza.py:** contains all the functions used in the cleaning and generation of data<br/>
+    **scraping.py:** contains the function used in the scraping<br/>
+    
+  c. data folder: contains both the data used and generated for the study
