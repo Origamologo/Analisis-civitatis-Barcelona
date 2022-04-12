@@ -4,7 +4,7 @@ import re
 
 # FUNCTION TO CLEAN THE CSV FROM THE GOVERMENT
 
-def pastor_de_guiris(df, ciudades):
+def clean_tourist(df, ciudades):
     '''
     Separates, organizes and saves the data in pickle format
     for the chosen city or cities.
@@ -69,7 +69,7 @@ def pastor_de_guiris(df, ciudades):
         guiris_esquilados['total_pernoctaciones'] = df_pernocguiris_esp['total'] + df_pernocguiris_ext['total']
         guiris_esquilados['media_total_pernoc'] = round((guiris_esquilados['total_pernoctaciones'] / guiris_esquilados['total_viajeros']), 1)
         
-        guiris_esquilados.to_pickle(rf'C:\Users\mituc\Ironhack\Curso\IronLabs\Proyecto-1\data\{ciudad}_guiris_esquilados.pkl')
+        guiris_esquilados.to_pickle(rf'C:\Users\mituc\Ironhack\Curso\IronLabs\Proyecto-1\data\{ciudad}_cleaned_tourist.pkl')
     return
 
 # FUNCTIONS TO CLEAN AND ORGANIZE THE INFORMATION FROM THE REVIEWS OBTAINED IN THE SCRAPING
@@ -330,6 +330,6 @@ def admon_cividates(df_turistas_admon):
     df_turistas_admon.reset_index(inplace=True)
     df_admon_select = df_turistas_admon.iloc[1:56]
     d=df_admon_select.sort_values(by=['periodo'])
-    d=d.drop(['viajeros_espana', 'viajeros_extranjero',	'pernoctaciones_espana', 'pernoctaciones_extranjero',	'media_pernoc_esp', 'media_pernoc_ext', 'total_pernoctaciones',	'media_total_pernoc'],axis=1)
+    #d=d.drop(['viajeros_espana', 'viajeros_extranjero', 'pernoctaciones_espana', 'pernoctaciones_extranjero',	'media_pernoc_esp', 'media_pernoc_ext', 'total_pernoctaciones',	'media_total_pernoc'], axis=1)
     df_admon_cividates = d.to_pickle(r'C:\Users\mituc\Ironhack\Curso\IronLabs\Proyecto-1\data\admon_cividates.pkl')
     return df_admon_cividates

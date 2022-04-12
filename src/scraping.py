@@ -54,7 +54,7 @@ def civitatiScrape():
     except:
         return print(f'Se paró en la página {contador}'), revius, driver.quit()
 
-    try:
+    try: 
         espera = round(random.uniform(3, 6),2)
         sleep(espera)
         action = ActionChains(driver)
