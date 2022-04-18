@@ -2,11 +2,12 @@ import streamlit as st
 import streamlit.components.v1 as components
 import streamlit as st
 from streamlit_keplergl import keplergl_static
-from keplergl import KeplerGl
-import pandas as pd
+from PIL import Image
 
-# Text/Title
-st.title("🌏 Civitatis' marketing strategy 🌍 ")
+img = Image.open("skyline_barcelona.jpg")
+st.image(img, width=700)
+
+st.title("🌏 Civitatis' marketing strategy 🌍")
 
 # Header/Subheader
 #st.header("")
