@@ -4,7 +4,7 @@ import streamlit as st
 from streamlit_keplergl import keplergl_static
 from PIL import Image
 
-img = Image.open("skyline_barcelona.jpg")
+img = Image.open("skyline_barcelona.png")
 st.image(img, width=700)
 
 st.title("🌏 Civitatis' marketing strategy 🌍")
@@ -16,13 +16,6 @@ st.subheader("We will measure the effectiveness of civitatis' marketing strategy
 audio_file = open("El_Turista_1999999.mp3","rb").read()
 st.audio(audio_file,format='audio/mp3')
 
-# Text
-#st.text("Hello Streamlit")
-
-# Markdown
-#st.markdown("### This is a Markdown")
-
-#st.success("Successful")
 status_1 = st.radio("Do you know what's civitatis?",("Yes","No"))
 
 if status_1 == 'Yes':
@@ -39,9 +32,10 @@ if status_2 == 'Yes':
 else:
 	st.info("A 'free tour' is a tour in which the tourist has to pay nothing to join\nthe activity, although he can tip the guide at the end of it. On the other hand,\nthe local guide must pay a fixed amount of money for each client that joins the tour\nto the OTA that provides the tourists. Taking on account that the risk for the\ncompanies is nearly zero, it's easy to figure out why this model, created by Chris\nSandemans in 2003, is nowadays followed by tons of companies (just type 'free tour'\non google and enjoy) and has become one of the main battle fields for walking tours\ncompanies.To check if the tourist who booked the activity actually showed up so they\ncan charge the guide (remember that it's free and you might feel in the mood for a\nbeer in stead of walking when the tour begins), civitatis ask the client for\na review. This is a very easy step for the client and he doesn't have to share any\ninformation if he doesn't want to, it works as a check in. If a tourist that was not\nreported by the local guide sends a review, the company will know that the guide is\ncheating... But for what matters to us, this means that the reviews in civitatis are\na trustful source of information regarding how many people joins the tours\nthey promote.")
 
+#st.error("For a correct visualization of the dashboard click on 'Deskopt mode'")
 def main():    
-    html_temp = """<div class='tableauPlaceholder' id='viz1650293587399' style='position: relative'><noscript><a href='#'><img alt='Portada ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;civitatis&#47;Portada&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='civitatis&#47;Portada' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;civitatis&#47;Portada&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1650293587399');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='727px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>"""
-    components.html(html_temp, height=900)
+    html_temp = """<div class='tableauPlaceholder' id='viz1650531297464' style='position: relative'><noscript><a href='#'><img alt='Portada ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;civitatis&#47;Portada&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='civitatis&#47;Portada' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;civitatis&#47;Portada&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1650531297464');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='650px';vizElement.style.height='1027px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='650px';vizElement.style.height='1027px';} else { vizElement.style.width='100%';vizElement.style.height='727px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>"""
+    components.html(html_temp, height=900, width=700)
 if __name__ == "__main__":    
 	main()
 
