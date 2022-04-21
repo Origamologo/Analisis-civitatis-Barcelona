@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 import streamlit as st
 from PIL import Image
 
-img = Image.open("skyline_barcelona.jpeg")
+img = Image.open("https://github.com/Origamologo/Analisis-civitatis-Barcelona/blob/main/streamlit/skyline_barcelona.jpeg")
 st.image(img, width=700)
 original_title = '<p style="font-family:Vengeance Bold, sans-serif; color:#ff0262; font-size: 45px;">🌏 Civitatis marketing strategy 🌍</p>'
 st.markdown(original_title, unsafe_allow_html=True)
