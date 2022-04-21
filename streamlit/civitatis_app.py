@@ -6,8 +6,7 @@ from PIL import Image
 
 #p = pathlib.Path("skyline_barcelona.jpeg")
 #img = Image.open(p)
-#st.image(img, width=700)
-st.image("https://github.com/Origamologo/Analisis-civitatis-Barcelona/blob/main/streamlit/skyline_barcelona.jpeg?raw=true", width=700)
+st.image("https://github.com/Origamologo/Analisis-civitatis-Barcelona/blob/main/streamlit/skyline_barcelona.jpeg?raw=true")
 original_title = '<p style="font-family:Vengeance Bold, sans-serif; color:#ff0262; font-size: 45px;">🌏 Civitatis marketing strategy 🌍</p>'
 st.markdown(original_title, unsafe_allow_html=True)
 
@@ -17,8 +16,8 @@ st.markdown(original_title, unsafe_allow_html=True)
 #st.header("")
 st.subheader("We will measure the effectiveness of civitatis' marketing strategy. To do so we will focus on Barcelona, one of the most competitive cities in the tourism industry, and we'll analize the performance of the most popular activity in civitatis' web page, the so called 'free tour', before and after the covid's lockdown.")
 
-audio_file = open("El_Turista_1999999.mp3","rb").read()
-st.audio(audio_file,format='audio/mp3')
+#audio_file = open("El_Turista_1999999.mp3","rb").read()
+st.audio("https://github.com/Origamologo/Analisis-civitatis-Barcelona/blob/main/streamlit/El_Turista_1999999.mp3",format='audio/mp3')
 
 status_1 = st.radio("Do you know what's civitatis?",("Yes","No"))
 
