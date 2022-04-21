@@ -47,6 +47,7 @@ st.markdown("Now let's see an historical view of the origin of the tourist that 
 HtmlFile = open("civitatis.html", 'r', encoding='utf-8')
 source_code = HtmlFile.read()
 components.html(source_code, height=900)
+components.iframe(src="https://github.com/Origamologo/Analisis-civitatis-Barcelona/blob/main/streamlit/civitatis.html", height=900, width=800)
 
 with open("civitatis.html", "rb") as file:
 
