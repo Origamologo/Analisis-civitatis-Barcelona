@@ -44,10 +44,11 @@ if __name__ == "__main__":
 
 st.markdown("Now let's see an historical view of the origin of the tourist that have join civitatis' free tour in Barcelona. You'll notice that most of them come from Spain and what happenned just after the lockdown is pretty obvious")
 
-HtmlFile = open("civitatis.html", 'r', encoding='utf-8')
-source_code = HtmlFile.read()
-components.html(source_code, height=900)
-components.iframe(src="https://github.com/Origamologo/Analisis-civitatis-Barcelona/blob/main/streamlit/civitatis.html", height=900, width=800)
+#HtmlFile = open("civitatis.html", 'r', encoding='utf-8')
+#source_code = HtmlFile.read()
+#components.html(source_code, height=900)
+components.iframe("https://raw.githubusercontent.com/Origamologo/Analisis-civitatis-Barcelona/main/streamlit/civitatis.html", 
+                height=900)
 
 with open("civitatis.html", "rb") as file:
 
